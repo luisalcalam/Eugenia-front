@@ -15,13 +15,16 @@
     
       <mat-form-field>
         <mat-label>Contraseña</mat-label>
-        <input type="password" matInput formControlName="password" placeholder="Contraseña">
+        <input [type]="passwordVisible ? 'text' : 'password'" matInput formControlName="password" placeholder="Contraseña">
+        <button mat-icon-button type="button" color="primary" matSuffix aria-label="Hide" (click)="passwordVisible = !passwordVisible">
+          <mat-icon>{{passwordVisible ?  'visibility' : 'visibility_off'}}</mat-icon>
+        </button>
         <mat-error *ngIf="myError('password', 'required')">La constraseña es requerida</mat-error>
         <mat-error *ngIf="myError('password', 'minlength')">La constraseña tiene que ser por lo menos de 6 digitos</mat-error>
         <mat-error *ngIf="myError('password', 'pattern')">Se necesita por lo menos una letra mayuscula, una miniscula y un número</mat-error>
       </mat-form-field>
     
-      <button mat-button mat-flat-button color="primary"
+      <button type="submit" mat-button mat-flat-button color="primary"
         >
         <mat-icon>save</mat-icon>
         Ingresar

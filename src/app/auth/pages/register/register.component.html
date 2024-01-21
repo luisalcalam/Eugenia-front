@@ -6,37 +6,37 @@
 
     <span class="text-lg mb-4">Registro</span>
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Nombre</mat-label>
       <input type="text" matInput formControlName="name" placeholder="Nombre">
       <mat-error *ngIf="myError('name', 'required')">El nombre es requerido</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Apellido Paterno</mat-label>
       <input type="text" matInput formControlName="surname" placeholder="Apellido paterno">
       <mat-error *ngIf="myError('surname', 'required')">El apellido paterno es requerido</mat-error>
     </mat-form-field>
     
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Apellido Materno</mat-label>
       <input type="text" matInput formControlName="secondSurname" placeholder="Apellido materno">
     </mat-form-field>
     
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Número de departamento</mat-label>
       <input type="text" matInput formControlName="apartment" placeholder="Número de departamento">
       <mat-error *ngIf="myError('apartment', 'required')">El número de departamento es requerido</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Correo</mat-label>
       <input type="email" matInput formControlName="email" placeholder="Correo electronico">
       <mat-error *ngIf="myError('email', 'required')">El correo es requerido</mat-error>
       <mat-error *ngIf="myError('email', 'email')">Debe ser un correo valido</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Contraseña</mat-label>
       <input type="password" matInput formControlName="password" placeholder="Contraseña">
       <mat-error *ngIf="myError('password', 'required')">La constraseña es requerida</mat-error>
