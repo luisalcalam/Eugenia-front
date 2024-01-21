@@ -1,0 +1,14 @@
+@use '@angular/material' as mat;
+@import '../colors';
+
+$eugenia-front-primary: mat.define-palette($custom-brand-primary);
+$eugenia-front-accent: mat.define-palette($custom-brand-accent);
+$eugenia-front-warn: mat.define-palette($custom-brand-warn);
+
+$eugenia-front-theme: mat.define-light-theme((
+  color: (
+    primary: $eugenia-front-primary,
+    accent: $eugenia-front-accent,
+    warn: $eugenia-front-warn,
+  )
+));
