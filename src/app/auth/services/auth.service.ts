@@ -5,6 +5,8 @@ import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 import { loginResponse } from '../interfaces/login-response.interface';
 import { User } from '../interfaces/user.interface';
 import { AuthStatus } from '../interfaces/auth-status.enum';
+import { RegisterRequest } from '../interfaces/register-request';
+import { RegisterResponse } from '../interfaces/register-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +26,6 @@ export class AuthService {
   }
 
   private setAuthentication(resp: loginResponse): boolean {
-    console.log({ resp });
     const { user, session } = resp;
     this._currentUser.set(user);
     this._authStatus.set(AuthStatus.authenticated);
@@ -40,6 +41,15 @@ export class AuthService {
 
     return this.http.post<loginResponse>(url, body).pipe(
       map((resp) => this.setAuthentication(resp)),
+      catchError((err) => throwError(() => err.error.message))
+    );
+  }
+
+  register(request: RegisterRequest): Observable<boolean> {
+    const url = `${this.baseUrl}/users`;
+
+    return this.http.post<RegisterResponse>(url, request).pipe(
+      map(() => true),
       catchError((err) => throwError(() => err.error.message))
     );
   }

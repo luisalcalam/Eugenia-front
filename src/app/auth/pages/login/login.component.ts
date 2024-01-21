@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { FormUtils } from '../../../core/utils/form.utils';
 
 @Component({
   selector: 'app-login',
@@ -35,9 +36,8 @@ export class LoginComponent {
   };
 
   login() {
-    if (!this.myForm.valid) {
-      this.myForm.markAllAsTouched();
-      this.myForm.markAsDirty();
+    if (this.myForm.invalid) {
+      FormUtils.checkAndUpdateForm(this.myForm);
       return;
     }
     const { email, password } = this.myForm.value;
