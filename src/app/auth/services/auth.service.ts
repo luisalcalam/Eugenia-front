@@ -7,6 +7,7 @@ import { User } from '../interfaces/user.interface';
 import { AuthStatus } from '../interfaces/auth-status.enum';
 import { RegisterRequest } from '../interfaces/register-request';
 import { RegisterResponse } from '../interfaces/register-response.interface';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -14,15 +15,16 @@ import { RegisterResponse } from '../interfaces/register-response.interface';
 export class AuthService {
   private readonly baseUrl: string = environment.baseUrl;
   private http = inject(HttpClient);
+  private router = inject(Router);
 
   private _currentUser = signal<User | null>(null);
   private _authStatus = signal<AuthStatus>(AuthStatus.checking);
 
-  // public currentUser = computed( () => this._currentUser() );
-  // public authStatus = computed( () => this._authStatus() );
+  public currentUser = computed(() => this._currentUser());
+  public authStatus = computed(() => this._authStatus());
 
   constructor() {
-    // this.checkAuthStatus().subscribe();
+    this.isAuthenticated().subscribe();
   }
 
   private setAuthentication(resp: loginResponse): boolean {
@@ -31,6 +33,7 @@ export class AuthService {
     this._authStatus.set(AuthStatus.authenticated);
     localStorage.setItem('eugenia-token', session.accessToken);
     localStorage.setItem('eugenia-refresh-token', session.refreshToken);
+    localStorage.setItem('eugenia-user', JSON.stringify(user));
 
     return true;
   }
@@ -54,34 +57,25 @@ export class AuthService {
     );
   }
 
-  // checkAuthStatus():Observable<boolean> {
+  isAuthenticated(): Observable<boolean> {
+    const token = localStorage.getItem('eugenia-token');
+    const user = localStorage.getItem('eugenia-user');
 
-  //   const url   = `${ this.baseUrl }/auth/check-token`;
-  //   const token = localStorage.getItem('token');
+    if (!token || !user) {
+      this.logout();
+      return of(false);
+    }
+    this._authStatus.set(AuthStatus.authenticated);
 
-  //   if ( !token ) {
-  //     this.logout();
-  //     return of(false);
-  //   }
+    return of(true);
+  }
 
-  //   const headers = new HttpHeaders()
-  //     .set('Authorization', `Bearer ${ token }`);
-
-  //     return this.http.get<CheckTokenResponse>(url, { headers })
-  //       .pipe(
-  //         map( ({ user, token }) => this.setAuthentication( user, token )),
-  //         catchError(() => {
-  //           this._authStatus.set( AuthStatus.notAuthenticated );
-  //           return of(false);
-  //         })
-  //       );
-
-  // }
-
-  // logout() {
-  //   localStorage.removeItem('token');
-  //   this._currentUser.set(null);
-  //   this._authStatus.set( AuthStatus.notAuthenticated );
-
-  // }
+  logout() {
+    localStorage.removeItem('eugenia-token');
+    localStorage.removeItem('eugenia-refresh-token');
+    localStorage.removeItem('eugenia-user');
+    this.router.navigate(['auth']);
+    this._currentUser.set(null);
+    this._authStatus.set(AuthStatus.notAuthenticated);
+  }
 }
