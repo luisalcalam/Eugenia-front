@@ -2,12 +2,18 @@ import { Injectable, computed, inject, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
-import { loginResponse } from '../interfaces/login-response.interface';
+import {
+  loginResponse,
+  RefreshTokenResponse,
+  TokenInterface,
+} from '../interfaces/login-response.interface';
 import { User } from '../interfaces/user.interface';
 import { AuthStatus } from '../interfaces/auth-status.enum';
 import { RegisterRequest } from '../interfaces/register-request';
 import { RegisterResponse } from '../interfaces/register-response.interface';
 import { Router } from '@angular/router';
+import { TokenService } from './token.service';
+import { Token } from '../classes/token';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +22,7 @@ export class AuthService {
   private readonly baseUrl: string = environment.baseUrl;
   private http = inject(HttpClient);
   private router = inject(Router);
+  private tokenService = inject(TokenService);
 
   private _currentUser = signal<User | null>(null);
   private _authStatus = signal<AuthStatus>(AuthStatus.checking);
@@ -31,8 +38,8 @@ export class AuthService {
     const { user, session } = resp;
     this._currentUser.set(user);
     this._authStatus.set(AuthStatus.authenticated);
-    localStorage.setItem('eugenia-token', session.accessToken);
-    localStorage.setItem('eugenia-refresh-token', session.refreshToken);
+    this.tokenService.set(Token.tokenJson(session.accessToken));
+    this.tokenService.setRefresh(Token.tokenJson(session.refreshToken));
     localStorage.setItem('eugenia-user', JSON.stringify(user));
 
     return true;
@@ -68,6 +75,19 @@ export class AuthService {
     this._authStatus.set(AuthStatus.authenticated);
 
     return of(true);
+  }
+
+  refreshToken(): Observable<TokenInterface> {
+    const url = `${this.baseUrl}/auth/refresh`;
+    const refresh = this.tokenService.getRefresh()?.getValue as string;
+    const headers = new HttpHeaders({ 'refresh-token': refresh });
+    return this.http.post<RefreshTokenResponse>(url, {}, { headers }).pipe(
+      map((resp) => {
+        this.tokenService.set(Token.tokenJson(resp.accessToken));
+        return resp.accessToken;
+      }),
+      catchError((err) => throwError(() => err.error.message))
+    );
   }
 
   logout() {
