@@ -1,0 +1,25 @@
+<div class="upper-paginator-wrapper" fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <p class="text-paginator mr-10">Elementos por página</p>
+    <mat-form-field appearance="outline">
+      <mat-select [formControl]="perPageControl">
+        <mat-option *ngFor="let perPageOption of perPageOptions" [value]="perPageOption.value">
+          {{perPageOption.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="paginator-wrapper">
+    <ng-container *ngFor="let page of localPageCollection">
+      <div class="paginator-box {{ isActive(page.index) ? 'active-page' : '' }}" (click)="requestPageChange(page)" >
+        <span *ngIf="!page.icon">
+          {{ page.display }}
+        </span>
+        <span *ngIf="page.icon">
+          <mat-icon aria-hidden="false" aria-label="icon">{{page.icon}}</mat-icon>
+          <!-- <i class="{{page.icon}}"></i> -->
+        </span>
+      </div>
+    </ng-container>
+  </div>
+</div>

@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use '@angular/material' as mat;
 @import '../colors';
 
@@ -12,3 +13,10 @@ $eugenia-front-theme: mat.define-light-theme((
     warn: $eugenia-front-warn,
   )
 ));
+
+$primary-color-50: #ebeefa;
+$primary-color-400: #7488dd;
+$primary-color-500: #5c73d7;
+$primary-color-900: #3043be;
+
+$warn-color-500: #ff5722;

@@ -1,0 +1,15 @@
+<div class="mt-10" fxLayout="row" fxLayoutAlign="space-between">
+  <div>
+    <button *ngIf="defaultBackLocation" mat-icon-button>
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+  <div>
+    <div class="centered-text title-wrapper">
+      {{title}}
+    </div>
+  </div>
+  <div>
+    <!-- <app-search fontSize="12px" (searchValueChange)="searchResources($event)" (clearSearchChange)="clearSearch()"></app-search> -->
+  </div>
+</div>

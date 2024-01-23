@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     MaterialModule,
     HttpClientModule,
     FormsModule,
+    FlexLayoutModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

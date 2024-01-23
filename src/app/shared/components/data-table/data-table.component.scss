@@ -1,0 +1,84 @@
+@import '/src/app/theme';
+
+$primary-color-50: #ebeefa;
+$primary-color-400: #7488dd;
+$primary-color-500: #5c73d7;
+$primary-color-900: #3043be;
+
+$warn-color-500: #ff5722;
+
+table {
+  width: 100%;
+  min-width: 650px;
+  box-shadow: none !important;
+}
+
+th { 
+  min-width: 40px;
+  padding: 0px 10px !important;
+}
+
+td { 
+  min-width: 40px;
+  padding: 0px 10px !important;
+}
+
+.table-wrapper {
+  border-collapse: collapse;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.20);
+  width: 100%;
+  overflow-x: auto;
+}
+
+.filters-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.example-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0px;
+  right: 0;
+  // background: rgba(0, 0, 0, 0.05);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-text {
+  text-align: center;
+  font-size: 18px;
+}
+
+:host ::ng-deep {
+  mat-form-field{
+    height: 20px;
+  }
+
+  .mat-mdc-row:hover {
+    background-color: $primary-color-50;
+  }
+
+  .mat-mdc-header-cell {
+      background: $primary-color-500 !important;
+      font-size: 18px;
+      color: #ffffff;
+  }
+
+  .mat-mdc-header-cell:first-of-type {
+      border-radius: 10px 0px 0 10px;
+  }
+
+  .mat-mdc-header-cell:last-of-type {
+      border-radius: 0 10px 10px 0;
+  }
+
+  .mat-mat-mdc-cell {
+      font-size: 16px;
+      font-weight: 500;
+  }
+}

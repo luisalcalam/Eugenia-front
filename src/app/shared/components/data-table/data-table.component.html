@@ -1,0 +1,85 @@
+<p *ngIf="implementationError" >Error de implementación en data-table</p>
+<div *ngIf="!implementationError" class="mt-20 mb-20" style="padding: 1rem;">
+
+
+  <div class="mb-20" fxLayout="row" fxLayoutAlign="space-between">
+    <div></div>
+    <div></div>
+    <div>
+      <app-search fontSize="12px" (searchValueChange)="searchResources($event)" (clearSearchChange)="clearSearch()"></app-search>
+    </div>
+  </div>  
+
+  <div class="table-wrapper">
+    <div *ngIf="isLoadingResults" class="example-loading-shade">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div *ngIf="dataError && !isLoadingResults" fxLayout="row" fxLayoutAlign="center" class="mt-20 mb-20">
+      <div fxLayout="column" class="error-text">
+        <p>Ocurrio un error al cargar los datos</p>
+        <app-svg template="error"></app-svg>
+      </div>
+    </div>
+    <div *ngIf="dataSource.length < 1 && !isLoadingResults" fxLayout="row" fxLayoutAlign="center" class="mt-20 mb-20">
+      <div fxLayout="column" class="error-text">
+        <p>No se encontraron resultados</p>
+        <app-svg template="no-results"></app-svg>
+      </div>
+    </div>
+    <table *ngIf="!dataError && dataSource.length > 0" mat-table [dataSource]="dataSource">
+    
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+            
+      <ng-container [matColumnDef]="field.tableValue" *ngFor="let field of fields">
+        <div [ngSwitch]="field.fieldType">
+          <ng-template [ngSwitchCase]="dataFieldTypeEnum.text">
+            <th mat-header-cell *matHeaderCellDef> {{field.name}} </th>
+            <td mat-cell *matCellDef="let element" (click)="rowClick.emit(element)"> {{field.tableValue2 ? element[field.tableValue][field.tableValue2] : element[field.tableValue] }} </td>
+          </ng-template>
+          <ng-template [ngSwitchCase]="dataFieldTypeEnum.date">
+            <th mat-header-cell *matHeaderCellDef> {{field.name}} </th>
+             <td mat-cell *matCellDef="let element" (click)="rowClick.emit(element)"> {{ element[field.tableValue] | date:field.dateFormat ? field.dateFormat : 'medium'}} </td>
+          </ng-template>
+
+        </div>
+      </ng-container>
+    
+      <!-- <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="weight">
+        <th mat-header-cell *matHeaderCellDef> Weight </th>
+        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="symbol">
+        <th mat-header-cell *matHeaderCellDef> Symbol </th>
+        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="na">
+        <th mat-header-cell *matHeaderCellDef> Nuevo campo </th>
+        <td mat-cell *matCellDef="let element"> {{element.na}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nuevoDato">
+        <th mat-header-cell *matHeaderCellDef> Nuevo campo mas grande </th>
+        <td mat-cell *matCellDef="let element"> {{element.nuevoDato}} </td>
+      </ng-container> -->
+    
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <app-paginator *ngIf="pagination && dataSource.length > 0" [pagination]="pagination" (pageChangeRequest)="pageChange($event)"></app-paginator>
+  </div>
+
+</div>
+

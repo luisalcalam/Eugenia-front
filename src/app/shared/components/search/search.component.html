@@ -1,0 +1,7 @@
+<mat-form-field class="example-form-field" [style.fontSize]="fontSize" appearance="outline">
+  <mat-label>{{placeholder}}</mat-label>
+  <input #searchField matInput autocomplete="off" type="text" [formControl]="searchControl">
+  <button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>

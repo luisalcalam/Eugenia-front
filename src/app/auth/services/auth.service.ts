@@ -46,7 +46,7 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<boolean> {
-    const url = `${this.baseUrl}/auth/login`;
+    const url = `${this.baseUrl}auth/login`;
     const body = { email, password };
 
     return this.http.post<loginResponse>(url, body).pipe(
@@ -56,7 +56,7 @@ export class AuthService {
   }
 
   register(request: RegisterRequest): Observable<boolean> {
-    const url = `${this.baseUrl}/users`;
+    const url = `${this.baseUrl}auth/signup`;
 
     return this.http.post<RegisterResponse>(url, request).pipe(
       map(() => true),
@@ -78,7 +78,7 @@ export class AuthService {
   }
 
   refreshToken(): Observable<TokenInterface> {
-    const url = `${this.baseUrl}/auth/refresh`;
+    const url = `${this.baseUrl}auth/refresh`;
     const refresh = this.tokenService.getRefresh()?.getValue as string;
     const headers = new HttpHeaders({ 'refresh-token': refresh });
     return this.http.post<RefreshTokenResponse>(url, {}, { headers }).pipe(

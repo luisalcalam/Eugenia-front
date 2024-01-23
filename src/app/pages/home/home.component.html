@@ -1,1 +1,4 @@
-<p>home works!</p>
+<mat-card class="mat-elevation-z2 pb-30">
+  <app-titile [title]="'Invitaciones'"></app-titile>
+  <app-data-table [dataTableImplementation]="tableImplementation" (rowClick)="rowClick($event)"></app-data-table>
+</mat-card>

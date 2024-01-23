@@ -1,0 +1,53 @@
+@import '/src/app/theme';
+
+:host ::ng-deep {
+  .upper-paginator-wrapper {
+    mat-form-field {
+      height: 100%;
+      .mat-form-field-infix {
+        padding: 0.6em 0 !important;
+      }
+      .mat-form-field-wrapper {
+        padding-bottom: 0px !important;
+        margin: 0px !important;
+      }
+    }
+  }
+}
+
+.upper-paginator-wrapper {
+  margin: 2rem 0;
+  padding: 0 2rem;
+  mat-form-field {
+    width: 90px;
+    .mat-form-field-infix {
+      padding: 0.5em 0 !important;
+    }
+  }
+  .text-paginator {
+    margin-bottom: 0px !important;
+  }
+  .paginator-wrapper {
+    display: flex;
+    width: fit-content;
+    .paginator-box {
+      height: 32px;
+      width: 32px;
+      color: #1b1b1b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #8993A4;
+      color: #091E42;
+      margin: 0 2px;
+      &.active-page {
+        border: none;
+        background: $primary-color-500;
+        color: #fff;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

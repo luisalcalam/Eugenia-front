@@ -28,8 +28,169 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Montserrat, Roboto, "Helvetica Neue", sans-serif; }
 
 .spacer {
   flex: 1 1 auto;
+}
+
+.pb-30 { 
+  padding-bottom: 30px !important;
+}
+.pb-50 { 
+  padding-bottom: 50px !important;
+}
+
+.mb-5 {
+  margin-bottom: 5px !important;
+}
+.mb-4 {
+  margin-bottom: 4px !important;
+}
+.mb-0 {
+  margin-bottom: 0px !important;
+}
+
+.mb-10 {
+  margin-bottom: 10px !important;
+}
+
+.mb-15 {
+  margin-bottom: 15px !important;
+}
+
+.mb-20 {
+  margin-bottom: 20px !important;
+}
+
+.mb-25 {
+  margin-bottom: 25px !important;
+}
+
+.mb-30 {
+  margin-bottom: 30px !important;
+}
+
+.mt-20 {
+  margin-top: 20px !important;
+}
+
+.mr-0 {
+  margin-right: 0px !important;
+}
+
+.nm-l {
+  margin-left: 0px !important;
+}
+
+.nm {
+  margin: 0 !important;
+}
+
+.mr-10 {
+  margin-right: 10px !important;
+}
+
+.mr-15 {
+  margin-right: 15px !important;
+}
+
+.mr-20 {
+  margin-right: 20px !important;
+}
+
+.mr-24 {
+  margin-right: 24px !important;
+}
+
+.mr-40 {
+  margin-right: 40px !important;
+}
+
+.mr-30 {
+  margin-right: 30px !important;
+}
+
+.ml-5 {
+  margin-left: 5px !important;
+}
+.ml-10 {
+  margin-left: 10px !important;
+}
+
+.ml-30 {
+  margin-left: 30px !important;
+}
+.ml-40 {
+  margin-left: 40px !important;
+}
+.ml-70 {
+  margin-left: 70px !important;
+}
+
+.ml-60 {
+  margin-left: 60px !important;
+}
+.ml-50 {
+  margin-left: 50px !important;
+}
+.ml-45 {
+  margin-left: 45px !important;
+}
+.mt-50 {
+  margin-top: 50px !important;
+}
+.mt-30 {
+  margin-top: 30px !important;
+}
+.mt-25 {
+  margin-top: 25px !important;
+}
+.mt-20 {
+  margin-top: 20px !important;
+}
+.mt-18 {
+  margin-top: 18px !important;
+}
+
+.mt-15 {
+  margin-top: 15px !important;
+}
+.mt-13 {
+  margin-top: 13px !important;
+}
+
+.mt-40 {
+  margin-top: 40px !important;
+}
+.mt-35 {
+  margin-top: 35px !important;
+}
+
+.mt-10 {
+  margin-top: 10px !important;
+}
+
+.mt-5 {
+  margin-top: 5px !important;
+}
+
+.mt-0 {
+  margin-top: 0px !important;
+}
+
+.mr-7 {
+  margin-right: 7px !important;
+}
+
+.ml-7 {
+  margin-left: 7px !important;
+}
+
+.m-10 {
+  margin: 10px;
+}
+
+.m-20 {
+  margin: 20px;
 }

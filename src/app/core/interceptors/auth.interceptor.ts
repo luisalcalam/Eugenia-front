@@ -36,14 +36,19 @@ export class AuthInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
+    if (this.isRefreshing) {
+      return next.handle(request);
+    }
     if (this.tokenService.get()) {
+      console.log('Entro');
       const token: string = this.tokenService.get()!.getValue;
       request = this.addToken(request, token);
     }
 
+    console.log(request.headers);
     return next.handle(request).pipe(
       catchError((err: HttpErrorResponse) => {
-        if (err.status === 403) {
+        if (err.status === 401) {
           return this.handle401Error(err, request, next);
         }
         return next.handle(request);
