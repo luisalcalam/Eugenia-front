@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { lastValueFrom } from 'rxjs';
+import { ModalService } from '../../core/services/modal.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-layout',
@@ -6,9 +9,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent {
+  private modalService = inject(ModalService);
+  private authService = inject(AuthService);
+
   public sidebarItems = [
-    { label: 'Listado', icon: 'label', url: './list' },
-    { label: 'Añadir', icon: 'add', url: './new-hero' },
-    { label: 'Buscar', icon: 'search', url: './search' },
+    { label: 'Invitaciones', icon: 'label', url: './invitations' },
+    { label: 'Añadir', icon: 'add', url: './new-invitation' },
+    // { label: 'Buscar', icon: 'search', url: './search' },
   ];
+
+  async logout() {
+    const modalRef = this.modalService.confirmModal();
+    const loginConfirm = await lastValueFrom(modalRef.afterClosed());
+
+    if (loginConfirm) {
+      this.authService.logout();
+    }
+  }
 }
