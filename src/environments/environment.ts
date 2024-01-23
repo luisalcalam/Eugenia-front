@@ -1,3 +1,3 @@
 export const environment = {
-  baseUrl: 'http://localhost:3000/api/v1/',
+  baseUrl: 'https://eugenia-api-production.up.railway.app/api/v1/',
 };
