@@ -17,9 +17,9 @@ export class LoginComponent {
   passwordVisible = false;
 
   public myForm: FormGroup = this.fb.group({
-    email: ['luis10@test.com', [Validators.required, Validators.email]],
+    email: ['', [Validators.required, Validators.email]],
     password: [
-      '123456All',
+      '',
       [
         Validators.required,
         Validators.minLength(6),
