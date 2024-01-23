@@ -8,7 +8,7 @@ import { MaterialModule } from '../material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { SvgComponent } from './components/svg/svg.component';
-import { TitileComponent } from './titile/titile.component';
+import { TitileComponent } from './components/titile/titile.component';
 
 @NgModule({
   declarations: [

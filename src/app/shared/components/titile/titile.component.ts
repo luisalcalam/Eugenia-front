@@ -1,5 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-titile',
@@ -8,10 +9,16 @@ import { Location } from '@angular/common';
 })
 export class TitileComponent {
   @Input() title = 'Titulo de la página';
-  public defaultBackLocation = false;
+  @Input() defaultBackLocation = false;
+  @Input() customBackLocation?: string;
   private location = inject(Location);
+  private router = inject(Router);
 
   back() {
-    this.location.back();
+    if (this.customBackLocation) {
+      this.router.navigate([this.customBackLocation]);
+    } else {
+      this.location.back();
+    }
   }
 }

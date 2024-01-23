@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
+import { NewInvitationComponent } from './new-invitation/new-invitation.component';
+import { EditInvitationComponent } from './edit-invitation/edit-invitation.component';
 
 // localhost:4200/auth/
 const routes: Routes = [
@@ -9,8 +11,10 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: 'home', component: HomeComponent },
-      { path: '**', redirectTo: 'home' },
+      { path: 'invitations', component: HomeComponent },
+      { path: 'new-invitation', component: NewInvitationComponent },
+      { path: 'edit-invitation/:id', component: EditInvitationComponent },
+      { path: '**', redirectTo: 'invitations' },
     ],
   },
 ];

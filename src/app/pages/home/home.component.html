@@ -1,4 +1,4 @@
 <mat-card class="mat-elevation-z2 pb-30">
   <app-titile [title]="'Invitaciones'"></app-titile>
-  <app-data-table [dataTableImplementation]="tableImplementation" (rowClick)="rowClick($event)"></app-data-table>
+  <app-data-table [dataTableImplementation]="tableImplementation" (rowClick)="rowClick($event)" (addClick)="addClick()"></app-data-table>
 </mat-card>

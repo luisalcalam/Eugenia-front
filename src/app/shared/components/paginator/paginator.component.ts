@@ -40,7 +40,7 @@ export class PaginatorComponent implements OnInit {
     { value: 30, viewValue: '30' },
     { value: 50, viewValue: '50' },
   ];
-  public perPageControl = new FormControl(15);
+  public perPageControl = new FormControl(10);
   constructor() {}
 
   ngOnInit(): void {

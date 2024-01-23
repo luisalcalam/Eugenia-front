@@ -30,6 +30,7 @@ export class DataTableComponent implements OnInit {
   dataSource: any[] = [];
   @Input() dataTableImplementation!: DataTableImplementation;
   @Output() rowClick = new EventEmitter<any>();
+  @Output() addClick = new EventEmitter<void>();
   isLoadingResults = false;
   dataResources?: any[];
   fields: DataField[] = [];
@@ -65,7 +66,6 @@ export class DataTableComponent implements OnInit {
       .get<any>(this.dataTableImplementation.path, this.getQueryParams())
       .subscribe({
         complete: () => {
-          console.log('Complete');
           this.isLoadingResults = false;
         },
         error: () => {
@@ -73,7 +73,6 @@ export class DataTableComponent implements OnInit {
           this.dataError = true;
         },
         next: (res) => {
-          console.log({ res });
           if (res.content.length < 1) {
             this.noData = true;
           }
@@ -108,7 +107,7 @@ export class DataTableComponent implements OnInit {
       params['currentPage'] = this.pagination.currentPage.toString();
     }
     if (this.search) {
-      params['search'] = this.search;
+      params['q'] = this.search;
     }
     return params;
   }

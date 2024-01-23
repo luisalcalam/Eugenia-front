@@ -2,11 +2,20 @@
 <div *ngIf="!implementationError" class="mt-20 mb-20" style="padding: 1rem;">
 
 
-  <div class="mb-20" fxLayout="row" fxLayoutAlign="space-between">
-    <div></div>
-    <div></div>
+  <div class="mb-20" fxLayout="row" fxLayoutAlign="space-between" style="min-height: 56px">
     <div>
       <app-search fontSize="12px" (searchValueChange)="searchResources($event)" (clearSearchChange)="clearSearch()"></app-search>
+    </div>
+    <div>
+      <button *ngIf="dataTableImplementation.addButton"
+                  mat-flat-button
+                  color="primary"
+                  type="submit"
+                  (click)="addClick.emit()"
+                >
+                  <mat-icon>add</mat-icon>
+                  Nuevo
+                </button>
     </div>
   </div>  
 

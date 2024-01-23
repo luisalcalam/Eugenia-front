@@ -1,0 +1,61 @@
+<mat-card class="mat-elevation-z2 pb-30">
+  <mat-card-content>
+    <app-titile [title]="'Nueva invitación'" [customBackLocation]="'dashboard/invitations'"></app-titile>
+    
+    <mat-divider class="mb-10"></mat-divider>
+    
+    <div class="grid">
+      <div *ngIf="isLoadingResults" class="example-loading-shade">
+        <mat-spinner></mat-spinner>
+      </div>
+    
+      <div class="col-12">
+    
+            <form autocomplete="off" [formGroup]="invitationForm" (ngSubmit)="create()">
+              <div class="grid">              
+                <mat-form-field class="col-12">
+                  <mat-label>Nombre del invitado</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    required
+                    formControlName="guestName"
+                  />
+                </mat-form-field>
+      
+                <mat-form-field class="example-full-width col-12 sm:col-6">
+                  <mat-label>Fecha de invitación</mat-label>
+                  <input matInput [min]="minDate" [matDatepicker]="picker1" formControlName="invitationDate">
+                  <mat-hint>DD/MM/YYYY</mat-hint>
+                  <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi #picker1></mat-datepicker>
+                </mat-form-field>
+                
+                <mat-form-field class="example-full-width col-12 sm:col-6">
+                  <mat-label>Expiración</mat-label>
+                  <mat-hint>DD/MM/YYYY</mat-hint>
+                  <input matInput [min]="minDueDate" [matDatepicker]="picker" formControlName="dueDate">
+                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+    
+              <div class="flex justify-content-end">
+                <button
+                  mat-flat-button
+                  color="primary"
+                  type="submit"
+                >
+                  <mat-icon>save</mat-icon>
+                  Guardar
+                </button>
+              </div>
+            </form>
+    
+    
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+

@@ -1,0 +1,75 @@
+<mat-card>
+  <mat-card-content>
+    <app-titile [title]="'Editar invitación'" [customBackLocation]="'dashboard/invitations'"></app-titile>
+    
+    <mat-divider class="mb-2"></mat-divider>
+    
+    <div class="grid">
+      <div *ngIf="isLoadingResults" class="example-loading-shade">
+        <mat-spinner></mat-spinner>
+      </div>
+    
+      <div class="col-12 sm:col-6">
+    
+            <form class="grid" [formGroup]="invitationForm">
+    
+              <mat-form-field class="col-12">
+                <mat-label>Nombre del invitado</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  required
+                  formControlName="guestName"
+                />
+              </mat-form-field>
+    
+              <mat-form-field class="example-full-width col-12">
+                <mat-label>Fecha de invitación</mat-label>
+                <input matInput [min]="minDate" [matDatepicker]="picker1" formControlName="invitationDate">
+                <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #picker1></mat-datepicker>
+              </mat-form-field>
+              
+              <mat-form-field class="example-full-width col-12">
+                <mat-label>Expiración</mat-label>
+                <input matInput [min]="minDueDate" [matDatepicker]="picker" formControlName="dueDate">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #picker></mat-datepicker>
+              </mat-form-field>
+
+              <div class="col-12">
+
+                <div class="flex justify-content-between">
+                  <button
+                    mat-flat-button
+                    color="warn"
+                  >
+                    Borrar
+                  </button>
+                  <span></span>
+        
+                  <button
+                    mat-flat-button
+                    color="primary"
+                  >
+                    <mat-icon>save</mat-icon>
+                    Guardar
+                  </button>
+                </div>
+              </div>
+            </form>
+    
+      </div>
+    
+      <div class="col-12 sm:col-6">
+    
+        <mat-card>
+          <!-- <img [src]="currentHero | heroImage" alt="imagen del héroe" mat-card-image> -->
+        </mat-card>
+    
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+

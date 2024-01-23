@@ -23,7 +23,7 @@ export class ApiService {
     });
   }
 
-  post(
+  post<T>(
     url: any,
     data: any,
     ignoreMessageService?: boolean,
@@ -35,34 +35,11 @@ export class ApiService {
       httpOptions = { reportProgress: true, observe: 'events' };
     }
 
-    if (ignoreMessageService) {
-      return this.httpClient.post(
-        environment.baseUrl + url,
-        formDataBody ? this.getFormData(data) : data,
-        httpOptions
-      );
-    } else {
-      return new Observable<any>((subs) => {
-        this.httpClient
-          .post(
-            environment.baseUrl + url,
-            formDataBody ? this.getFormData(data) : data,
-            httpOptions
-          )
-          .subscribe(
-            (event: any) => {
-              this.eventsWrapper(event, subs, reportProgress);
-            },
-            (error) => {
-              // this.message.errorMessage(this.getStringError(error));
-              subs.error(error);
-            },
-            () => {
-              subs.complete();
-            }
-          );
-      });
-    }
+    return this.httpClient.post<T>(
+      environment.baseUrl + url,
+      formDataBody ? this.getFormData(data) : data,
+      httpOptions
+    );
   }
 
   patch(

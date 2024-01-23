@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 import {
   DataTableImplementation,
   DataFieldTypeEnum,
 } from '../../shared/components/data-table/interfaces/dataTable.interface';
+import { InvitationResponse } from '../common/interfaces/invitations.interface';
 
 @Component({
   selector: 'app-home',
@@ -12,12 +12,11 @@ import {
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  private readonly baseUrl: string = environment.baseUrl;
-  private http = inject(HttpClient);
-  constructor() {}
+  private router = inject(Router);
 
   tableImplementation: DataTableImplementation = {
     path: 'invitations',
+    addButton: true,
     fields: [
       {
         name: 'Invitado',
@@ -37,7 +36,13 @@ export class HomeComponent {
     ],
   };
 
-  rowClick($event: any) {
-    console.log('Click', $event);
+  rowClick($event: InvitationResponse) {
+    this.router.navigate(['/dashboard/edit-invitation/', $event.id], {
+      state: { data: $event },
+    });
+  }
+
+  addClick() {
+    this.router.navigateByUrl('/dashboard/new-invitation');
   }
 }

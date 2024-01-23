@@ -1,6 +1,7 @@
 export interface DataTableImplementation {
   path: string;
   fields: DataField[];
+  addButton?: boolean;
 }
 
 export interface DataField {
