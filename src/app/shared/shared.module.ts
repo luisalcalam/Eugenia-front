@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { SvgComponent } from './components/svg/svg.component';
 import { TitileComponent } from './components/titile/titile.component';
+import { DialogGeneralComponent } from './components/dialogs/dialog-general/dialog-general.component';
+import { DialogConfirmComponent } from './components/dialogs/dialog-confirm/dialog-confirm.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { TitileComponent } from './components/titile/titile.component';
     SvgComponent,
     PaginatorComponent,
     TitileComponent,
+    DialogGeneralComponent,
+    DialogConfirmComponent,
   ],
   imports: [
     CommonModule,

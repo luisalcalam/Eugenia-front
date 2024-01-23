@@ -4,16 +4,16 @@
     
     <mat-divider class="mb-2"></mat-divider>
     
+    <div *ngIf="isLoadingResults" class="example-loading-shade">
+      <mat-spinner></mat-spinner>
+    </div>
     <div class="grid">
-      <div *ngIf="isLoadingResults" class="example-loading-shade">
-        <mat-spinner></mat-spinner>
-      </div>
     
-      <div class="col-12 sm:col-6">
+      <div class="col-12 sm:col-8">
     
-            <form class="grid" [formGroup]="invitationForm">
+            <form class="grid" [formGroup]="invitationForm" (ngSubmit)="saveInvitation()">
     
-              <mat-form-field class="col-12">
+              <mat-form-field appearance="outline" class="col-12">
                 <mat-label>Nombre del invitado</mat-label>
                 <input
                   matInput
@@ -23,14 +23,14 @@
                 />
               </mat-form-field>
     
-              <mat-form-field class="example-full-width col-12">
+              <mat-form-field appearance="outline" class="example-full-width col-12">
                 <mat-label>Fecha de invitación</mat-label>
                 <input matInput [min]="minDate" [matDatepicker]="picker1" formControlName="invitationDate">
                 <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker touchUi #picker1></mat-datepicker>
               </mat-form-field>
               
-              <mat-form-field class="example-full-width col-12">
+              <mat-form-field appearance="outline" class="example-full-width col-12">
                 <mat-label>Expiración</mat-label>
                 <input matInput [min]="minDueDate" [matDatepicker]="picker" formControlName="dueDate">
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
@@ -40,18 +40,13 @@
               <div class="col-12">
 
                 <div class="flex justify-content-between">
-                  <button
-                    mat-flat-button
-                    color="warn"
-                  >
-                    Borrar
-                  </button>
+                  <div>
+                    <button (click)="delete()" mat-flat-button color="warn">Borrar</button>
+                    <button *ngIf="changesDetected()" (click)="cancelChanges()" class="ml-5" mat-flat-button color="accent">Cancelar</button>
+                  </div>
                   <span></span>
         
-                  <button
-                    mat-flat-button
-                    color="primary"
-                  >
+                  <button [disabled]="!changesDetected()" mat-flat-button color="primary">
                     <mat-icon>save</mat-icon>
                     Guardar
                   </button>
@@ -61,10 +56,12 @@
     
       </div>
     
-      <div class="col-12 sm:col-6">
+      <div class="col-12 sm:col-4">
     
         <mat-card>
-          <!-- <img [src]="currentHero | heroImage" alt="imagen del héroe" mat-card-image> -->
+          <div class="flex justify-content-center">
+            <qrcode [qrdata]="qrCodeText" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+          </div>
         </mat-card>
     
       </div>

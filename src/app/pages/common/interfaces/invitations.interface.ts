@@ -3,6 +3,11 @@ export interface CreateInvitationReq {
   invitationDate: Date;
   dueDate: Date;
 }
+export interface UpdateInvitationReq {
+  guestName?: string;
+  invitationDate?: Date;
+  dueDate?: Date;
+}
 
 export interface InvitationResponse {
   id: string;

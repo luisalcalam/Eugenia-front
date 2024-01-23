@@ -11,6 +11,18 @@ import { httpUtils } from '../utils/http.utils';
 export class ApiService {
   constructor(private httpClient: HttpClient) {}
 
+  getOne<I>(
+    url: any,
+    queryParams?: { [key: string]: string },
+    ignoreMessageService?: boolean
+  ) {
+    return this.httpClient.get<I>(environment.baseUrl + url, {
+      params: new HttpParams({
+        fromObject: queryParams,
+      }),
+    });
+  }
+
   get<I>(
     url: any,
     queryParams?: { [key: string]: string },
@@ -54,34 +66,11 @@ export class ApiService {
       httpOptions = { reportProgress: true, observe: 'events' };
     }
 
-    if (ignoreMessageService) {
-      return this.httpClient.patch(
-        environment.baseUrl + url,
-        formDataBody ? this.getFormData(data) : data,
-        httpOptions
-      );
-    } else {
-      return new Observable<any>((subs) => {
-        this.httpClient
-          .patch(
-            environment.baseUrl + url,
-            formDataBody ? this.getFormData(data) : data,
-            httpOptions
-          )
-          .subscribe(
-            (event: any) => {
-              this.eventsWrapper(event, subs, reportProgress);
-            },
-            (error) => {
-              // this.message.errorMessage(this.getStringError(error));
-              subs.error(error);
-            },
-            () => {
-              subs.complete();
-            }
-          );
-      });
-    }
+    return this.httpClient.patch(
+      environment.baseUrl + url,
+      formDataBody ? this.getFormData(data) : data,
+      httpOptions
+    );
   }
 
   put(
